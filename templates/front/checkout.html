@@ -1,0 +1,286 @@
+{% extends 'front/master.html' %}
+
+{% block content %}
+
+    <!-- Steps -->
+    <section class="py-3 bg-light border-bottom">
+        <div class="container">
+            <div class="d-flex checkout-steps">
+                <div class="step"><i class="fa-regular fa-circle-check"></i> Cart</div>
+                <div class="sep"></div>
+                <div class="step font-weight-bold text-dark"><i class="fa-solid fa-truck"></i> Checkout</div>
+                <div class="sep"></div>
+                <div class="step"><i class="fa-regular fa-credit-card"></i> Payment</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- LEFT: Forms -->
+                <div class="col-lg-8">
+
+                    <!-- Contact -->
+                    <div class="card card-shadow mb-4">
+                        <div class="card-body">
+                            <h6 class="text-uppercase text-muted form-section-title mb-3">Contact</h6>
+                            <form id="checkoutForm" action="/place-order" method="post" novalidate>
+                                <!-- @csrf (Laravel) -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email</label>
+                                        <input id="email" name="email" type="email" class="form-control"
+                                               placeholder="name@mail.com" required>
+                                        <div class="invalid-feedback">Please enter a valid email.</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="phone">Phone</label>
+                                        <input id="phone" name="phone" type="tel" class="form-control"
+                                               placeholder="+855 ..." required>
+                                        <div class="invalid-feedback">Phone is required.</div>
+                                    </div>
+                                </div>
+
+                                <!-- Billing Address -->
+                                <h6 class="text-uppercase text-muted form-section-title mt-2 mb-3">Billing Address</h6>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="first_name">First Name</label>
+                                        <input id="first_name" name="first_name" class="form-control" required>
+                                        <div class="invalid-feedback">Required.</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="last_name">Last Name</label>
+                                        <input id="last_name" name="last_name" class="form-control" required>
+                                        <div class="invalid-feedback">Required.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address1">Address</label>
+                                    <input id="address1" name="address1" class="form-control"
+                                           placeholder="Street, building, etc." required>
+                                    <div class="invalid-feedback">Required.</div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City</label>
+                                        <input id="city" name="city" class="form-control" required>
+                                        <div class="invalid-feedback">Required.</div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="state">State/Province</label>
+                                        <input id="state" name="state" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="zip">ZIP/Postal</label>
+                                        <input id="zip" name="zip" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Shipping same as billing -->
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="sameShipping" checked>
+                                    <label class="custom-control-label" for="sameShipping">Shipping address same as
+                                        billing</label>
+                                </div>
+
+                                <!-- Shipping Address (toggle) -->
+                                <div id="shippingBlock" class="d-none">
+                                    <h6 class="text-uppercase text-muted form-section-title mt-2 mb-3">Shipping
+                                        Address</h6>
+                                    <div class="form-group">
+                                        <label for="s_address1">Address</label>
+                                        <input id="s_address1" name="s_address1" class="form-control"
+                                               placeholder="Street, building, etc.">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="s_city">City</label>
+                                            <input id="s_city" name="s_city" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="s_state">State/Province</label>
+                                            <input id="s_state" name="s_state" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="s_zip">ZIP/Postal</label>
+                                            <input id="s_zip" name="s_zip" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Delivery Method -->
+                                <div class="card card-shadow mt-4">
+                                    <div class="card-body">
+                                        <h6 class="text-uppercase text-muted form-section-title mb-3">Delivery</h6>
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input ship-radio" type="radio" name="shipping"
+                                                   id="shipStandard" value="standard" data-price="3.00" checked>
+                                            <label class="custom-control-label" for="shipStandard">
+                                                Standard (3–5 days) — <strong>$3.00</strong>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input ship-radio" type="radio" name="shipping"
+                                                   id="shipExpress" value="express" data-price="7.00">
+                                            <label class="custom-control-label" for="shipExpress">
+                                                Express (1–2 days) — <strong>$7.00</strong>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input ship-radio" type="radio" name="shipping"
+                                                   id="shipPickup" value="pickup" data-price="0.00">
+                                            <label class="custom-control-label" for="shipPickup">
+                                                Store Pickup — <strong>Free</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Method -->
+                                <div class="card card-shadow mt-4">
+                                    <div class="card-body">
+                                        <h6 class="text-uppercase text-muted form-section-title mb-3">Payment</h6>
+
+                                        <div id="paymentAccordion">
+                                            <div class="custom-control custom-radio mb-2">
+                                                <input class="custom-control-input" type="radio" name="payment"
+                                                       id="payCOD" value="cod" checked data-toggle="collapse"
+                                                       data-target="#codPanel">
+                                                <label class="custom-control-label" for="payCOD">Cash on
+                                                    Delivery</label>
+                                            </div>
+                                            <div id="codPanel" class="collapse show" data-parent="#paymentAccordion">
+                                                <div class="border rounded p-3 mb-3">
+                                                    <small class="text-muted">Pay with cash when your order
+                                                        arrives.</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="custom-control custom-radio mb-2">
+                                                <input class="custom-control-input" type="radio" name="payment"
+                                                       id="payCard" value="card" data-toggle="collapse"
+                                                       data-target="#cardPanel">
+                                                <label class="custom-control-label" for="payCard">Credit/Debit
+                                                    Card</label>
+                                            </div>
+                                            <div id="cardPanel" class="collapse" data-parent="#paymentAccordion">
+                                                <div class="border rounded p-3">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-8">
+                                                            <label for="card_number">Card Number</label>
+                                                            <input id="card_number" class="form-control"
+                                                                   placeholder="4242 4242 4242 4242">
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <label for="card_exp">MM/YY</label>
+                                                            <input id="card_exp" class="form-control"
+                                                                   placeholder="10/28">
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <label for="card_cvc">CVC</label>
+                                                            <input id="card_cvc" class="form-control" placeholder="123">
+                                                        </div>
+                                                    </div>
+                                                    <small class="text-muted">Demo fields only. Integrate
+                                                        Stripe/PayWay/etc. in production.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Notes & Terms -->
+                                <div class="card card-shadow mt-4">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="notes">Order Notes (optional)</label>
+                                            <textarea id="notes" name="notes" rows="3" class="form-control"
+                                                      placeholder="E.g., Leave at reception, call before delivery…"></textarea>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="agree" required>
+                                            <label class="custom-control-label" for="agree">I agree to the Terms &
+                                                Privacy Policy.</label>
+                                            <div class="invalid-feedback d-block">Required to place order.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark btn-lg mt-3">
+                                    <i class="fa-solid fa-lock mr-1"></i> Place Order
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Summary -->
+                <div class="col-lg-4">
+                    <div class="card card-shadow sticky-summary">
+                        <div class="card-body">
+                            <h6 class="text-uppercase mb-3">Order Summary</h6>
+
+                            <!-- Items (replace with server-rendered list) -->
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Wireless Headset <small class="text-muted">x1</small>
+                                    <span class="price">$59.00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Smart Watch Pro <small class="text-muted">x2</small>
+                                    <span class="price">$258.00</span>
+                                </li>
+                            </ul>
+
+                            <div class="d-flex justify-content-between">
+                                <span>Subtotal</span>
+                                <strong id="sumSubtotal">$317.00</strong>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Shipping</span>
+                                <strong id="sumShipping">$3.00</strong>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Tax (10%)</span>
+                                <strong id="sumTax">$31.70</strong>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span>Total</span>
+                                <strong id="sumTotal" class="h5 mb-0">$351.70</strong>
+                            </div>
+
+                            <!-- Coupon -->
+                            <form id="couponForm" class="form-inline mt-3">
+                                <label class="sr-only" for="coupon">Coupon</label>
+                                <input id="coupon" type="text" class="form-control mr-2 mb-2" placeholder="PROMO10">
+                                <button class="btn btn-outline-secondary mb-2" type="submit">Apply</button>
+                                <small id="couponMsg" class="ml-2 d-none">Applied!</small>
+                            </form>
+
+                            <a href="/cart" class="btn btn-link btn-sm p-0 mt-2"><i
+                                    class="fa-solid fa-angle-left mr-1"></i>Back to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile sticky total -->
+    <div class="mobile-checkout d-md-none bg-white border-top">
+        <div class="container py-2">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <small class="text-muted d-block">Total</small>
+                    <strong id="mobileTotal">$351.70</strong>
+                </div>
+                <a href="#" class="btn btn-dark btn-sm"
+                   onclick="document.getElementById('checkoutForm').requestSubmit()">Place Order</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

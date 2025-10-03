@@ -1,0 +1,166 @@
+{% extends 'front/master.html' %}
+
+{% block content %}
+    <!-- HERO -->
+    <section class="page-hero py-5">
+        <div class="container">
+            <h2 class="mb-1">Contact Us</h2>
+            <p class="text-muted mb-0">Questions, feedback, or partnership ideas? We’d love to hear from you.</p>
+        </div>
+    </section>
+    <main class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- LEFT: Form -->
+                <div class="col-lg-7 mb-4">
+                    <div class="card contact-card">
+                        <div class="card-body p-4">
+                            <h5 class="mb-3">Send a Message</h5>
+                            <form id="contactForm" action="/contact" method="post" novalidate>
+                                <!-- For Laravel/Flask, include CSRF as needed -->
+                                <!-- @csrf (Laravel) -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <div class="invalid-feedback">Please enter your name.</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <div class="invalid-feedback">Enter a valid email.</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="phone">Phone (optional)</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone"
+                                               placeholder="+855 ...">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" class="form-control" id="subject" name="subject" required>
+                                        <div class="invalid-feedback">Please add a subject.</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" rows="5" id="message" name="message" minlength="10"
+                                              required></textarea>
+                                    <small class="form-text text-muted">At least 10 characters.</small>
+                                    <div class="invalid-feedback">Please write a message (10+ chars).</div>
+                                </div>
+
+                                <!-- Honeypot (spam trap) -->
+                                <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+                                    <label>Do not fill this</label>
+                                    <input type="text" name="website">
+                                </div>
+
+                                <!-- reCAPTCHA placeholder (optional) -->
+                                <!-- <div class="g-recaptcha mb-3" data-sitekey="YOUR_SITE_KEY"></div> -->
+
+                                <button type="submit" class="btn btn-dark">
+                                    <i class="fa-regular fa-paper-plane mr-1"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Info + Map + FAQ -->
+                <div class="col-lg-5">
+                    <div class="card contact-card mb-4">
+                        <div class="card-body p-4">
+                            <h6 class="text-uppercase text-muted mb-3">Contact Information</h6>
+                            <div class="media align-items-center mb-3">
+                                <span class="icon-circle mr-3"><i class="fa-solid fa-location-dot"></i></span>
+                                <div class="media-body">Phnom Penh, Cambodia</div>
+                            </div>
+                            <div class="media align-items-center mb-3">
+                                <span class="icon-circle mr-3"><i class="fa-solid fa-envelope"></i></span>
+                                <div class="media-body"><a href="mailto:info@samplestore.com">info@samplestore.com</a>
+                                </div>
+                            </div>
+                            <div class="media align-items-center mb-3">
+                                <span class="icon-circle mr-3"><i class="fa-solid fa-phone"></i></span>
+                                <div class="media-body">+855 123 456 789</div>
+                            </div>
+                            <div class="media align-items-center">
+                                <span class="icon-circle mr-3"><i class="fa-regular fa-clock"></i></span>
+                                <div class="media-body">Mon–Sat: 9:00–18:00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card contact-card mb-4">
+                        <div class="card-body p-0">
+                            <!-- Replace src with your map embed -->
+                            <iframe class="map-embed"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15644.639!2d104.90!3d11.56!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x!2sPhnom%20Penh!5e0!3m2!1sen!2skh!4v0000000000"
+                                    allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="card contact-card">
+                        <div class="card-body p-4">
+                            <h6 class="text-uppercase text-muted mb-3">Quick FAQs</h6>
+                            <div id="faq" class="accordion">
+                                <div class="card mb-2">
+                                    <div class="card-header p-2" id="q1">
+                                        <h6 class="mb-0">
+                                            <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#a1"
+                                                    aria-expanded="true" aria-controls="a1">
+                                                How long is shipping?
+                                            </button>
+                                        </h6>
+                                    </div>
+                                    <div id="a1" class="collapse show" aria-labelledby="q1" data-parent="#faq">
+                                        <div class="card-body pt-2">1–3 business days in Phnom Penh; 3–7 days
+                                            nationwide.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-2">
+                                    <div class="card-header p-2" id="q2">
+                                        <h6 class="mb-0">
+                                            <button class="btn btn-link btn-sm collapsed" data-toggle="collapse"
+                                                    data-target="#a2" aria-expanded="false" aria-controls="a2">
+                                                Can I return items?
+                                            </button>
+                                        </h6>
+                                    </div>
+                                    <div id="a2" class="collapse" aria-labelledby="q2" data-parent="#faq">
+                                        <div class="card-body pt-2">Yes, within 7 days in original condition (see
+                                            policy).
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header p-2" id="q3">
+                                        <h6 class="mb-0">
+                                            <button class="btn btn-link btn-sm collapsed" data-toggle="collapse"
+                                                    data-target="#a3" aria-expanded="false" aria-controls="a3">
+                                                Do you offer COD?
+                                            </button>
+                                        </h6>
+                                    </div>
+                                    <div id="a3" class="collapse" aria-labelledby="q3" data-parent="#faq">
+                                        <div class="card-body pt-2">Yes, Cash on Delivery is available in selected
+                                            areas.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- /RIGHT -->
+            </div>
+        </div>
+    </main>
+{% endblock %}
