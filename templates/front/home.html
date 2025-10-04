@@ -27,62 +27,26 @@
 
             <!-- Example product grid placeholder (replace with your cards) -->
             <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img class="card-img-top" src="https://picsum.photos/seed/p1/600/400" alt="Product">
-                        <div class="card-body">
-                            <h6 class="card-title mb-1">Wireless Headset</h6>
-                            <p class="text-muted mb-2">Crystal-clear sound, 30h battery</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h6 mb-0">$59.00</span>
-                                <a href="#" class="btn btn-sm btn-dark"><i
-                                        class="fa-solid fa-cart-plus mr-1"></i>Add</a>
+                {% for item in range(12) %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <a href="/detail?name=Wireless Headset">
+                                <img class="card-img-top" src="https://picsum.photos/seed/p{{ item + 1 }}/600/400" alt="Product">
+                            </a>
+                            <div class="card-body">
+                                <a href="/detail?name=Wireless Headset">
+                                    <h6 class="card-title mb-1">Wireless Headset</h6>
+                                    <p class="text-muted mb-2">Crystal-clear sound, 30h battery</p>
+                                </a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="h6 mb-0">$59.00</span>
+                                    <a href="#" class="btn btn-sm btn-dark"><i
+                                            class="fa-solid fa-cart-plus mr-1"></i>Add</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img class="card-img-top" src="https://picsum.photos/seed/p2/600/400" alt="Product">
-                        <div class="card-body">
-                            <h6 class="card-title mb-1">Smart Watch Pro</h6>
-                            <p class="text-muted mb-2">Health tracking, GPS, waterproof</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h6 mb-0">$129.00</span>
-                                <a href="#" class="btn btn-sm btn-dark"><i
-                                        class="fa-solid fa-cart-plus mr-1"></i>Add</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img class="card-img-top" src="https://picsum.photos/seed/p3/600/400" alt="Product">
-                        <div class="card-body">
-                            <h6 class="card-title mb-1">Ultrabook 14”</h6>
-                            <p class="text-muted mb-2">Lightweight, long battery, SSD</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h6 mb-0">$899.00</span>
-                                <a href="#" class="btn btn-sm btn-dark"><i
-                                        class="fa-solid fa-cart-plus mr-1"></i>Add</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img class="card-img-top" src="https://picsum.photos/seed/p3/600/400" alt="Product">
-                        <div class="card-body">
-                            <h6 class="card-title mb-1">Ultrabook 14”</h6>
-                            <p class="text-muted mb-2">Lightweight, long battery, SSD</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h6 mb-0">$899.00</span>
-                                <a href="#" class="btn btn-sm btn-dark"><i
-                                        class="fa-solid fa-cart-plus mr-1"></i>Add</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
         </div>
