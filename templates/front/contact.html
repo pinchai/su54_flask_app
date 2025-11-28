@@ -16,9 +16,12 @@
                     <div class="card contact-card">
                         <div class="card-body p-4">
                             <h5 class="mb-3">Send a Message</h5>
-                            <form id="contactForm" action="/contact" method="post" novalidate>
-                                <!-- For Laravel/Flask, include CSRF as needed -->
-                                <!-- @csrf (Laravel) -->
+                            <form
+                                    id="contactForm"
+                                    action="/contact/submit"
+                                    method="post"
+                                    novalidate
+                            >
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="name">Full Name</label>
@@ -53,17 +56,9 @@
                                     <div class="invalid-feedback">Please write a message (10+ chars).</div>
                                 </div>
 
-                                <!-- Honeypot (spam trap) -->
-                                <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
-                                    <label>Do not fill this</label>
-                                    <input type="text" name="website">
-                                </div>
-
-                                <!-- reCAPTCHA placeholder (optional) -->
-                                <!-- <div class="g-recaptcha mb-3" data-sitekey="YOUR_SITE_KEY"></div> -->
-
                                 <button type="submit" class="btn btn-dark">
-                                    <i class="fa-regular fa-paper-plane mr-1"></i>Send Message
+                                    <i class="fa-regular fa-paper-plane mr-1"></i>
+                                    Send Message
                                 </button>
                             </form>
                         </div>

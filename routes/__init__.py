@@ -5,3 +5,7 @@ from routes.front.contact import *
 from routes.front.cart import *
 from routes.front.checkout import *
 from routes.front.detail import *
+
+
+# BackEnd Route
+from routes.admin.summernote import *
