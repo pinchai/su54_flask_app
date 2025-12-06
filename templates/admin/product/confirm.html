@@ -1,0 +1,63 @@
+{% extends 'admin/master.html' %}
+
+{% block page_title %}
+    Admin | Confirm Delete Product
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Confirm Delete Page</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ url_for('product') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Confirm Delete Page</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <a
+                                href="{{ url_for('product') }}"
+                                class="btn btn-outline-secondary"
+                        >
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+                        <center>
+                            <h3>Do you want to delete ?</h3>
+                            <ul>
+                                <li>Name: Coca</li>
+                                <li>Category: Drink</li>
+                            </ul>
+                        </center>
+                        <form>
+                            <input type="hidden" name="pro_id" value="1">
+                            <button
+                                    type="submit"
+                                    class="btn btn-danger float-right w-100"
+                            > Yes, Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content -->
+    </div>
+{% endblock %}

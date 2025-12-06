@@ -1,0 +1,124 @@
+{% extends 'admin/master.html' %}
+
+{% block page_title %}
+    Admin | Add Product
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Add Product Page</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ url_for('product') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Add Product Page</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <a
+                                href="{{ url_for('product') }}"
+                                class="btn btn-outline-secondary"
+                        >
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </a>
+                    </div>
+                    <h1>{{ status }}</h1>
+                    <div class="card-body">
+                        <form>
+                            {#name#}
+                            <div class="form-group">
+                                <label for="name">Name(*)</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="name"
+                                >
+                            </div>
+                            {#category#}
+                            <div class="form-group">
+                                <label for="category">Category(*)</label>
+                                <select
+                                        class="form-control"
+                                        id="category"
+                                >
+                                    <option value="drink">Drink</option>
+                                    <option value="food">Food</option>
+                                </select>
+                            </div>
+
+                            {#cost#}
+                            <div class="form-group">
+                                <label for="cost">Cost(*)</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        id="cost"
+                                        value="0"
+                                >
+                            </div>
+                            {#price#}
+                            <div class="form-group">
+                                <label for="price">Price(*)</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        id="price"
+                                        value="0"
+                                >
+                            </div>
+                            {#description#}
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea
+                                        class="form-control"
+                                        id="price"
+                                ></textarea>
+                            </div>
+
+
+                            <button
+                                    type="reset"
+                                    class="btn btn-danger float-left"
+                            >Cancel
+                            </button>
+
+                            {% if status == 'add' %}
+                                <button
+                                        type="submit"
+                                        class="btn btn-primary float-right"
+                                >Save
+                                </button>
+                            {% endif %}
+
+
+                            {% if status == 'edit' %}
+                                <button
+                                        type="submit"
+                                        class="btn btn-warning float-right"
+                                >Update
+                                </button>
+                            {% endif %}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content -->
+    </div>
+{% endblock %}

@@ -1,1 +1,2 @@
-from routes.admin.admin import *
+from routes.admin.dashboard import *
+from routes.admin.product import *
