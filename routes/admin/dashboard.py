@@ -1,6 +1,7 @@
 from app import app, render_template
 
 
+@app.get('/admin')
 @app.get('/admin/dashboard')
 def dashboard():
     module = 'dashboard'
