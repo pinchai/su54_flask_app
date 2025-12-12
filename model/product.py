@@ -1,0 +1,10 @@
+from app import db
+
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    category_id = db.Column(db.Integer, nullable=False)
+    cost = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    image = db.Column(db.String(128))
